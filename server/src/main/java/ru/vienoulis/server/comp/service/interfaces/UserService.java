@@ -1,15 +1,17 @@
 package ru.vienoulis.server.comp.service.interfaces;
 
+import org.springframework.security.core.userdetails.UserDetailsService;
 import ru.vienoulis.server.comp.model.User;
-
 import java.util.List;
 
-public interface UserService {
+public interface UserService extends UserDetailsService {
     List<User> getUsers();
 
     void add(User user, String[] roleList);
 
-    void updateUser(User user, String... roleList);
+    void add(User user);
+
+    User updateUser( User user, String ... roleList);
 
     void delete(Long userId);
 

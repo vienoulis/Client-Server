@@ -12,8 +12,11 @@ import java.util.List;
 @Service
 public class RoleServiceImp implements RoleService {
 
-    @Autowired
-    private RoleDao dao;
+    private final RoleDao dao;
+
+    public RoleServiceImp(RoleDao dao) {
+        this.dao = dao;
+    }
 
     @Override
     @Transactional

@@ -16,12 +16,13 @@ public class RoleDaoImp implements RoleDao {
 
     @Override
     public Role getRoleByName(String role) {
-        return (Role) entityManager.createQuery("from Role where role= :rl")
+        Role role1 = (Role) entityManager.createQuery("from Role where role= :rl")
                 .setParameter("rl", role).getSingleResult();
+        return role1;
     }
 
     @Override
     public List<Role> getAllRoles() {
-        return entityManager.createQuery("select role from Role ").getResultList();
+        return entityManager.createQuery(" from Role ").getResultList();
     }
 }

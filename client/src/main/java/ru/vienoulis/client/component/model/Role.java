@@ -1,10 +1,11 @@
 package ru.vienoulis.client.component.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.security.core.GrantedAuthority;
 
 import java.util.Objects;
 
-
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Role implements GrantedAuthority {
     private Long id;
 

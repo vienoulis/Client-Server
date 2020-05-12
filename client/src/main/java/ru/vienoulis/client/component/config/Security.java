@@ -1,6 +1,5 @@
 package ru.vienoulis.client.component.config;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
@@ -15,19 +14,23 @@ import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import ru.vienoulis.client.component.handler.LoginSuccessHandler;
+import ru.vienoulis.client.component.service.inter.UserService;
 
 @Configuration
-@ComponentScan("component")
+@ComponentScan("ru.vienoulis.client.component")
 @EnableWebSecurity
 public class Security extends WebSecurityConfigurerAdapter {
 
-    @Autowired
-    private UserDetailsService service;
+    private final UserDetailsService service;
+
+    public Security(@Qualifier("userServiceImp") UserDetailsService service) {
+        this.service = service;
+    }
 
     @Override
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(service).passwordEncoder(passwordEncoder());
-//        auth.inMemoryAuthentication().withUser("ADMIN").password("ADMIN").roles("ADMIN");
+//        auth.inMemoryAuthentication().withUser("ADMIN").password("ADMIN").roles("ROLE_ADMIN");
 
     }
 
@@ -61,9 +64,6 @@ public class Security extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 //страницы аутентификаци доступна всем
                 .antMatchers("/login").anonymous()
-//                .antMatchers("/test").anonymous()
-//                .antMatchers("/GET/**").anonymous()
-
                 // защищенные URL
                 .antMatchers("/user").access("hasAnyRole('USER')")
                 .antMatchers("/admin/**").access("hasAnyRole('ADMIN')").anyRequest().authenticated();

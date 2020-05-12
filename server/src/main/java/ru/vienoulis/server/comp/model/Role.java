@@ -1,5 +1,8 @@
 package ru.vienoulis.server.comp.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.springframework.security.core.GrantedAuthority;
+
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Objects;
@@ -7,7 +10,8 @@ import java.util.Objects;
 @XmlRootElement
 @Entity
 @Table(name = "roles")
-public class Role {
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class Role implements GrantedAuthority {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,9 +20,6 @@ public class Role {
 
     @Column(name = "role")
     private String role;
-
-//    @ManyToMany(mappedBy = "roleSet")
-//    private Set<User> userSet = new HashSet<>();
 
     public Role() {
     }
@@ -29,8 +30,6 @@ public class Role {
         this.role = role;
     }
 
-//    @XmlID
-//    @XmlJavaTypeAdapter(value = LongAdapter.class, type = String.class)
     public Long getId() {
         return id;
     }
@@ -48,13 +47,6 @@ public class Role {
         this.role = role;
     }
 
-//    @XmlIDREF
-//    public Set<User> getUserSet() {
-//        return userSet;
-//    }
-
-//    pu
-
     @Override
     public String toString() {
         return role.substring(5).toLowerCase();
@@ -71,5 +63,10 @@ public class Role {
     @Override
     public int hashCode() {
         return Objects.hash(role);
+    }
+
+    @Override
+    public String getAuthority() {
+        return getRole();
     }
 }

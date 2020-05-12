@@ -4,10 +4,11 @@ function createTable() {
     let parent = document.querySelector("#testtable");
     // parent.empty();
     $.ajax({
-        url: "http://localhost:8080/GET/user_list",
+        url: "http://localhost:8081/GET/client/user_list",
         success: function (data) {
             data.forEach(el => {
                 let tr = document.createElement('tr');
+                tr.id= el.id;
                 let roles = "";
                 el.roleSet.forEach(obj => {
                     roles = roles + " " + obj.role;

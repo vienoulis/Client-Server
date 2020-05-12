@@ -3,7 +3,7 @@ $('.update-modal').on('show.bs.modal', function (event) {
     const id = button.data('whatever'); // Extract info from data-* attributes
     const modal = $(this);
     $.ajax({
-        url: "http://localhost:8080/GET/user/by_id",
+        url: "http://localhost:8081/GET/client/user/by_id",
         method: "GET",
         data: 'id='+ id,
         success: function (data) {

@@ -50,7 +50,7 @@
 
 
                                 <h3 class="alert bg-light border-bottom container-fluid pl-3 mb-0">
-                                    All users
+                                    [[${visitor.name}]]
                                 </h3>
                                 <div class="mt-4 pl-4 pr-4">
                                     <table class="wt-2 table table-striped">
@@ -65,7 +65,7 @@
                                         </tr>
                                         </thead>
                                         <tbody class="">
-                                        <a th:each="user:${users}">
+                                        <a th:each="user:${visitor}">
 
                                             <input type="hidden" th:value="${user.id}" name="userId">
                                             <tr>

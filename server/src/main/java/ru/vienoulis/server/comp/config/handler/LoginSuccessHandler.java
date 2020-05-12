@@ -1,9 +1,8 @@
-package ru.vienoulis.client.component.handler;
+package ru.vienoulis.server.comp.config.handler;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
-import ru.vienoulis.client.component.model.Role;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -18,11 +17,5 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
                                         HttpServletResponse httpServletResponse,
                                         Authentication authentication) throws IOException, ServletException {
 
-
-        if (authentication.getAuthorities().contains(new Role(1L, "ROLE_ADMIN"))) {
-            httpServletResponse.sendRedirect("admin");
-        } else if (authentication.getAuthorities().contains(new Role(2L, "ROLE_USER"))) {
-            httpServletResponse.sendRedirect("user");
-        }
     }
 }

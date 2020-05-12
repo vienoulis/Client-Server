@@ -1,6 +1,8 @@
 package ru.vienoulis.client.component.model;
 
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -9,6 +11,7 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class User implements UserDetails {
     private long id;
 
@@ -22,19 +25,20 @@ public class User implements UserDetails {
 
     private String password;
 
-
     private Set<Role> roleSet = new HashSet<>();
 
     public User() {
     }
 
-    public User(long id, String name, int age, String lastName, String email, String password) {
+    @JsonCreator
+    public User(long id, String name, int age, String lastName, String email, String password, Set<Role> roleSet) {
         this.id = id;
         this.name = name;
         this.age = age;
         this.lastName = lastName;
         this.email = email;
         this.password = password;
+        this.roleSet = roleSet;
     }
 
     public long getId() {
@@ -86,8 +90,8 @@ public class User implements UserDetails {
     }
 
     @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return getRoleSet();
+    public Set<Role> getAuthorities() {
+        return roleSet;
     }
 
     public String getPassword() {
