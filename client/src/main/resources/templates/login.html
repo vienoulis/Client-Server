@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+
+    <title>Hello</title>
+    <style>
+        .form-signin {
+            width: 100%;
+            max-width: 350px;
+            padding: 15px;
+            margin: auto;
+        }
+
+        body {
+            position: center;
+            background-color: #f8f9fa;
+            /*left:40%;*/
+            padding-top: 10%;
+
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <div class="form-signin">
+        <h3><strong>Please sign in</strong></h3>
+
+        <form method="post" action="/login" role="form">
+            <div class="form-group">
+                <input name="j_username" class=" form-control" placeholder="Email address"/>
+                <input name="j_password" class=" form-control" placeholder="Password"/>
+            </div>
+            <div class="form-group">
+                <input class="btn btn-primary btn-lg btn-block" type="submit" value="Sing In"/> <br/>
+            </div>
+        </form>
+
+    </div>
+
+</div>
+</body>
+</html>
