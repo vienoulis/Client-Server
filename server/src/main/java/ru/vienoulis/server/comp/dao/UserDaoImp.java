@@ -44,23 +44,9 @@ public class UserDaoImp implements UserDao {
 
     @Override
     public User getUserByName(String name) {
-//        Set<Role> roleSet = new HashSet<>();
-//        roleSet.add(new Role(1L, "ROLE_ADMIN" ));
-//        roleSet.add(new Role(2L, "ROLE_USER"));
-//
-//        User user = new User();
-//        user.setName(name);
-//        user.setId(33);
-//        user.setRoleSet(roleSet);
-//        user.setAge(1);
-//        user.setPassword("1");
-//        User user = entityManager.find(User.class, 33L);
         User user = (User) entityManager.createQuery("from User user where name = :nm")
                 .setParameter("nm", name)
                 .getSingleResult();
-
-//        return (User) entityManager.createQuery("select User from User where name = :nm")
-//                .setParameter("nm", name).getSingleResult();
         return user;
     }
 

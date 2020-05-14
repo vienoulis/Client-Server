@@ -13,6 +13,8 @@ public interface UserService extends UserDetailsService {
 
     User updateUser( User user, String ... roleList);
 
+    User updateUser( User user);
+
     void delete(Long userId);
 
     User getUserByName(String name);

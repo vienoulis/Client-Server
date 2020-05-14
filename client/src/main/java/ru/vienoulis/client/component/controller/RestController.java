@@ -1,16 +1,18 @@
 package ru.vienoulis.client.component.controller;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
 import ru.vienoulis.client.component.model.Role;
 import ru.vienoulis.client.component.model.User;
 import java.util.List;
 
-@Controller
+@org.springframework.web.bind.annotation.RestController
 public class RestController {
     private final RestTemplate restTemplate;
     private final String serverUrl;
@@ -52,36 +54,26 @@ public class RestController {
         ).getBody();
     }
 
-    public void addUser(@RequestBody User user) {
-        restTemplate.exchange(
-//                serverUrl + "PUT/add/user?name=" + user.getName() + "",
-                serverUrl + "POST/add/user",
-                HttpMethod.POST,
-                new HttpEntity<>(user),
-//                null,
-                new ParameterizedTypeReference<User>() {
-                }
+    public void addUser(User user) {
+        restTemplate.postForEntity(
+                serverUrl + "/POST/add/user",
+                user,
+                User.class
         );
+
     }
 
     public void update(User user) {
-        restTemplate.exchange(
+        restTemplate.put(
                 serverUrl + "/POST/update",
-                HttpMethod.POST,
-                new HttpEntity<>(user),
-                new ParameterizedTypeReference<User>() {
-                }
+                user
         );
     }
 
-    public void delete(Long userId) {
-        restTemplate.exchange(
-                serverUrl + "POST/delete",
-                HttpMethod.POST,
-                new HttpEntity<>(userId),
-                new ParameterizedTypeReference<User>() {
-                }
-        );
+    public long delete(Long userId) {
+        restTemplate.delete(
+                serverUrl + "POST/delete?id=" + userId);
+        return userId;
     }
 
     public User getUserById(Long id) {

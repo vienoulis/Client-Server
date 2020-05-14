@@ -1,6 +1,6 @@
 package ru.vienoulis.server.comp.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import ru.vienoulis.server.comp.model.Role;
 import ru.vienoulis.server.comp.model.User;
@@ -29,26 +29,24 @@ public class RestController {
         return userService.getUserById(id);
     }
 
-    @PostMapping("POST/add/user")
-    @ResponseBody
-    public void postUser( User user){
+    @PostMapping(value = "/POST/add/user",produces = MediaType.APPLICATION_JSON_VALUE)
+    public void postUser(@RequestBody User user){
         userService.add(user);
-//        String name;
     }
 
-    @GetMapping("GET/user_list")
+    @GetMapping("/GET/user_list")
     public List<User> getAdmin() {
         return userService.getUsers();
     }
 
-    @PostMapping("/POST/delete")
-    public long postDelete(Long id) {
+    @DeleteMapping("/POST/delete")
+    public long postDelete( Long id) {
         userService.delete(id);
         return id;
     }
-    @PostMapping("/POST/update")
-    public User postUpdateUser(User user, String ...roleList){
-        return userService.updateUser(user, roleList);
+    @PutMapping("/POST/update")
+    public User postUpdateUser(@RequestBody User user){
+        return userService.updateUser(user);
     }
 
     @GetMapping("/GET/role/list")

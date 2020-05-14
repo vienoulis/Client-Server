@@ -1,12 +1,9 @@
 package ru.vienoulis.client.component.model;
 
 
-import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.Collection;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -30,7 +27,6 @@ public class User implements UserDetails {
     public User() {
     }
 
-    @JsonCreator
     public User(long id, String name, int age, String lastName, String email, String password, Set<Role> roleSet) {
         this.id = id;
         this.name = name;

@@ -62,6 +62,12 @@ public class UserServiceImp implements UserService {
         dao.update(user);
         return user;
     }
+    @Override
+    @Transactional
+    public User updateUser (User user){
+        dao.update(user);
+        return user;
+    }
 
     @Override
     @Transactional
